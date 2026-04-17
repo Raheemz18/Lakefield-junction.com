@@ -1,24 +1,31 @@
-import { STORES } from "./data/stores";
+import { STORES, CATEGORIES } from "./data/stores";
+import StoreCard from "./components/StoreCard";
 
 export default function App() {
   return (
-    <div className="container">
-      <h1>Lakefield Junction</h1>
-      <p>Your Lifestyle Hub</p>
+    <div className="mall-app">
+      {/* HERO SECTION */}
+      <header className="hero">
+        <div className="hero-overlay" />
+        <div className="hero-content">
+          <h1>Lakefield Junction</h1>
+          <p>Your Luxury Lifestyle Destination</p>
+        </div>
+      </header>
 
-      <div className="grid">
+      {/* CATEGORY NAV */}
+      <div className="category-bar">
+        {CATEGORIES.map((c) => (
+          <button key={c.id} className="category-pill">
+            {c.icon} {c.label}
+          </button>
+        ))}
+      </div>
+
+      {/* STORE GRID */}
+      <div className="store-grid">
         {STORES.map((store) => (
-          <div key={store.id} className="card">
-            <h2>{store.name}</h2>
-            <p>{store.description}</p>
-            <span className="tag">{store.category}</span>
-
-            {store.website && (
-              <a href={store.website} target="_blank">
-                Visit Website
-              </a>
-            )}
-          </div>
+          <StoreCard key={store.id} store={store} />
         ))}
       </div>
     </div>
